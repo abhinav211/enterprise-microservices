@@ -1,0 +1,20 @@
+employee:
+  replicaCount: 2
+  image: employee-service:v2
+
+auth:
+  replicaCount: 2
+  image: auth-service:v1
+
+gateway:
+  replicaCount: 2
+  image: api-gateway:v2
+
+postgres:
+  image: postgres:15
+
+redis:
+  image: redis:7
+
+ingress:
+  host: enterprise.local
