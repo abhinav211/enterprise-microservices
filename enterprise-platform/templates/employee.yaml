@@ -19,8 +19,8 @@ spec:
     spec:
       containers:
         - name: employee-service
-          image: {{ .Values.employee.image }}
-          imagePullPolicy: Never
+          image: ghcr.io/abhinav211/employee-service:latest
+          imagePullPolicy: Always
 
           ports:
             - containerPort: 5000
