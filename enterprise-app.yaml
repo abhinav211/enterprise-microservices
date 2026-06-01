@@ -16,10 +16,16 @@ spec:
     server: https://kubernetes.default.svc
     namespace: dev
 
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
+
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
 
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
