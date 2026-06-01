@@ -1,7 +1,9 @@
 employee:
   replicaCount: 2
-  image: employee-service:v2
 
+  image:
+    repository: ghcr.io/abhinav211/employee-service
+    tag: latest
 auth:
   replicaCount: 2
   image: auth-service:v1
