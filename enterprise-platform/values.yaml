@@ -3,7 +3,7 @@ employee:
 
   image:
     repository: ghcr.io/abhinav211/employee-service
-    tag: 5613b1268b5fa12864764cba73821e8b3965fd1a
+    tag: c6690828704c5545ba7302a4845d5c9541b3bde3
 auth:
   replicaCount: 2
   image: auth-service:v1
