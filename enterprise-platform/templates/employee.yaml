@@ -18,47 +18,53 @@ spec:
 
     spec:
       containers:
-      - name: employee-service
-        image: {{ .Values.employee.image }}
-        imagePullPolicy: Never
+        - name: employee-service
+          image: {{ .Values.employee.image }}
+          imagePullPolicy: Never
 
-        ports:
-        - containerPort: 5000
+          ports:
+            - containerPort: 5000
 
-        env:
-        - name: DB_HOST
-          value: postgres
+          env:
+            - name: DB_HOST
+              value: postgres
 
-        - name: DB_NAME
-          value: employees
+            - name: DB_NAME
+              value: employees
 
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: POSTGRES_USER
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
 
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: postgres-secret
-              key: POSTGRES_PASSWORD
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
 
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 5000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
 
-          initialDelaySeconds: 5
-          periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
 
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 5000
-
-          initialDelaySeconds: 10
-          periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
 
 ---
 apiVersion: v1
@@ -72,7 +78,7 @@ spec:
     app: employee-service
 
   ports:
-  - port: 80
-    targetPort: 5000
+    - port: 80
+      targetPort: 5000
 
   type: ClusterIP
