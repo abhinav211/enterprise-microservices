@@ -39,7 +39,7 @@ def home():
     conn.close()
 
     return jsonify({
-        "service": "employee-service-v4",
+        "service": "employee-service-v5",
         "hostname": socket.gethostname(),
         "employees": employees
     })
